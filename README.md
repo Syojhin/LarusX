@@ -6,6 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-blue.svg)](https://microsoft.com/windows)
 [![Vendor](https://img.shields.io/badge/Hardware-NVIDIA%20%7C%20AMD%20%7C%20Intel-purple.svg)](#hardware-compatibility)
+[![Laptops](https://img.shields.io/badge/Laptops-NVIDIA%20Optimus%20%26%20Hybrid%20Ready-orange.svg)](#laptop--nvidia-optimus-support)
 [![Performance](https://img.shields.io/badge/FPS%20Impact-0.0%25-brightgreen.svg)](#architecture)
 [![Anti--Cheat](https://img.shields.io/badge/Anti--Cheat-100%25%20Safe%20%28Zero%20Hook%29-success.svg)](#anti-cheat-safety)
 
@@ -16,6 +17,7 @@
 **LarusX** is a high-performance, lightweight display tuning and reticle HUD utility built in pure Rust. It transforms ordinary 1080p/1440p gaming panels into tournament-grade competitive displays by providing:
 
 - **0.0% FPS Overhead:** Directly configures Desktop Window Manager (DWM) hardware composition matrices. Zero video hooks, zero screen grabbing, zero OBS capture lag.
+- **Laptop & NVIDIA Optimus Ready:** Bypasses the classic hybrid graphics lock that prevents NVIDIA Control Panel from adjusting vibrance on laptop screens.
 - **Hardware-Level Black Equalizer:** Recovers hidden enemy geometry in deep shadows without blowing out skies or highlights.
 - **Subpixel Anti-Aliased Crosshair HUD:** 32-bit ARGB overlay with subpixel precision that ensures reticles are dead-center on physical monitor rasters.
 - **Auto-Process Detection:** Dynamically switches color profiles when games are focused and resets upon Alt-Tabbing.
@@ -23,15 +25,27 @@
 
 ---
 
+## 💻 Laptop & NVIDIA Optimus Support
+
+Traditional tools (such as VibranceGUI) rely on proprietary NVIDIA driver calls (`NvAPI_SetDVCLevel`). On gaming laptops with **NVIDIA Optimus / Hybrid Graphics**, the built-in screen is physically wired to the Intel or AMD integrated GPU (iGPU), causing NVIDIA Control Panel and NVAPI tools to **fail completely**.
+
+**LarusX completely eliminates this limitation:**
+- Intercepts composition at the **Windows DWM Compositor** layer.
+- Works seamlessly on **any gaming laptop screen**, whether running through an Intel iGPU, AMD Radeon 780M/680M APU, or discrete MUX switch.
+- Also supports external monitors connected via HDMI, DisplayPort, or USB-C Thunderbolt.
+
+---
+
 ## 🎮 Hardware Compatibility
 
-LarusX avoids proprietary driver hacks (like NVAPI or AMD ADL) in favor of standardized Windows Display Driver Model (WDDM) APIs:
+LarusX avoids proprietary driver hacks in favor of standardized Windows Display Driver Model (WDDM) APIs:
 
 | GPU Architecture | Status | Supported Features |
 | :--- | :--- | :--- |
 | **NVIDIA GeForce** (RTX 50/40/30/20, GTX 16/10) |  Full Native | 5x5 Color Matrix, GDI Gamma LUT, Subpixel Crosshair |
 | **AMD Radeon** (RX 7000/6000/5000, Vega, Polaris) |  Full Native | 5x5 Color Matrix, GDI Gamma LUT, Subpixel Crosshair |
 | **Intel Arc / Iris Xe** (A770, A750, B580, Integrated) |  Full Native | 5x5 Color Matrix, GDI Gamma LUT, Subpixel Crosshair |
+| **Gaming Laptops (Optimus / Hybrid MUX)** |  Full Native | 5x5 Color Matrix, GDI Gamma LUT, Subpixel Crosshair |
 
 ---
 
@@ -103,7 +117,7 @@ cd larusx
 cargo build --release
 ```
 
-The compiled standalone executable will be located at `target/release/larusx.exe` (approx. 4.8 MB, zero external runtime dependencies).
+The compiled standalone executable will be located at `target/release/larusx.exe` (approx. 3.7 MB, zero external runtime dependencies).
 
 ---
 
