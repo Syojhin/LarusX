@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Deep Glass Slate Tile -->
+    <linearGradient id="larusTile" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141923" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0a0d14" stop-opacity="0.98"/>
+    </linearGradient>
+
+    <!-- Glass Rim Lighting -->
+    <linearGradient id="larusRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFAA" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#00E5FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00FFAA" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Neon Ribbon Glow Gradients -->
+    <linearGradient id="larusNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFAA"/>
+      <stop offset="50%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00FF88"/>
+    </linearGradient>
+
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="16" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base Tile -->
+  <rect x="40" y="40" width="432" height="432" rx="88" fill="url(#larusTile)" stroke="url(#larusRim)" stroke-width="3.5"/>
+
+  <!-- Ambient Light Reflection -->
+  <path d="M 60 120 C 60 76, 76 60, 120 60 L 392 60 C 436 60, 452 76, 452 120 L 452 160 C 320 180, 180 180, 60 160 Z" fill="#ffffff" opacity="0.03"/>
+
+  <!-- Core S+L Cyber Ribbon -->
+  <g filter="url(#neonGlow)" transform="translate(256, 256) scale(1.05) translate(-256, -256)">
+    <!-- Architectural L Base & Spine -->
+    <path d="M 205 125 L 205 370 L 335 370" fill="none" stroke="url(#larusNeon)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Flowing S Interlock Ribbon -->
+    <path d="M 315 155 C 315 115, 195 115, 195 205 C 195 295, 320 250, 320 335 C 320 410, 195 405, 185 365" 
+          fill="none" stroke="url(#larusNeon)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Inner Core Highlights -->
+    <path d="M 215 140 L 215 355 L 320 355" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+    <path d="M 305 165 C 305 135, 210 135, 210 205 C 210 280, 305 245, 305 325" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  </g>
+</svg>
