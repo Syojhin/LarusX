@@ -1,0 +1,8 @@
+# LarusX — Competitive Display & Crosshair Engine
+
+/target
+*.pdb
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
