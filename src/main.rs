@@ -34,13 +34,23 @@ fn main() -> eframe::Result<()> {
         }
     });
 
-    // 4. Configure eframe native window
+    // 4. Load application icon
+    let icon_bytes = include_bytes!("../assets/app_icon.png");
+    let icon_data = eframe::icon_data::from_png_bytes(icon_bytes).ok();
+
+    let mut viewport = eframe::egui::ViewportBuilder::default()
+        .with_inner_size([540.0, 680.0])
+        .with_min_inner_size([460.0, 520.0])
+        .with_title("LarusX — Competitive Display & Crosshair Engine (Syojhin & Lara)")
+        .with_active(true);
+
+    if let Some(icon) = icon_data {
+        viewport = viewport.with_icon(icon);
+    }
+
+    // 5. Configure eframe native window
     let options = eframe::NativeOptions {
-        viewport: eframe::egui::ViewportBuilder::default()
-            .with_inner_size([540.0, 680.0])
-            .with_min_inner_size([460.0, 520.0])
-            .with_title("LarusX - Native Display & Target Visibility Engine")
-            .with_active(true),
+        viewport,
         ..Default::default()
     };
 
